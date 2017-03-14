@@ -1,0 +1,44 @@
+<%= form_for :results do |f| %>
+  <%= f.submit "Find Jobs", class: "button submit" %>
+  <%= fields_for :query do |query_fields| %>
+
+    <ul>
+      Position Level:
+      <% @levels.each do |level| %>
+        <li>
+          <label><%= check_box_tag 'query[level][]', level -%> <%= level -%></label>
+        </li>
+      <% end %>
+    </ul>
+
+    <ul>
+      Company:<br>
+      Enter a comma-separated list
+      <li>
+        <%= text_area_tag 'query[company]', nil, rows: 4, cols: 30 -%>
+      </li>
+    </ul>
+
+    <ul>
+      Category:
+      <% @categories.each do |category| %>
+        <li>
+          <label><%= check_box_tag 'query[category][]', category -%> <%= category -%></label>
+        </li>
+      <% end %>
+    </ul>
+
+    <ul>
+      Location:
+      <% @locations.each do |location| %>
+        <li>
+          <label><%= check_box_tag 'query[location][]', location -%> <%= location -%></label>
+        </li>
+      <% end %>
+    </ul>
+
+    <%end %>
+
+<% end %>
+
+

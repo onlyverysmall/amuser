@@ -5,7 +5,6 @@ class JobSearcher
   base_uri 'api-v2.themuse.com'
 
   def initialize(page, query)
-    puts query
     @options = {
       page: page,
       location: query[:location],

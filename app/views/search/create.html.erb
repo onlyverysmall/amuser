@@ -1,0 +1,32 @@
+<ul>
+  <li class="button">
+    <%= link_to "New Search", root_path, method: :get %>
+  </li>
+  <li class="button">page <%= @results[:page] %> / <%= @results[:page_count] %></li>
+  <li class="button">total results: <%= @results[:total] %></li>
+</ul>
+
+<div class="button">
+  <%- if @results[:page_count] > @results[:page] %>
+    <%= button_to "More Jobs", root_path, method: :create, params: { page: @results[:page] + 1 } %>
+  <%- end %>
+</div>
+<div class="button">
+  <%- if @results[:page] > 1 %>
+    <%= button_to "Previous Jobs", root_path, method: :create, params: { page: @results[:page] - 1 } %>
+  <%- end %>
+</div>
+
+<%- if @jobs.present? %>
+  <%- @jobs.each do |job| %>
+    <ul>
+      <li><strong><%= link_to job.name, job.landing,target: "_blank" %></strong> at <%= job.company %></li>
+      <li><small>Locations</small> <%= job.locations.join(', ') %></li>
+      <li><small>Categories</small> <%= job.categories.join(', ') %></li>
+      <li><small>Levels</small> <%= job.levels.join(', ') %></li>
+      <li><small>Posted</small> <%= job.pub_date.strftime("%b %l, %Y ") %></li>
+    </ul>
+  <%- end %>
+<%- else %>
+  <p>No jobs to display</p>
+<%- end %>
